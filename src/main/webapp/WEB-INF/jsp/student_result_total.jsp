@@ -154,6 +154,7 @@ tr:nth-child(even) {
 							<th>Maximum Marks</th>
 							<th>Percentage</th>
 							<th>View Result</th>
+							<th>Marksheet</th>
 						</tr>
 			   
 					<tr>
@@ -164,6 +165,7 @@ tr:nth-child(even) {
 						<td>${maximum_mark}</td>
 						<td>${per}</td>
 						<td><a href="<c:url value='/student_view_result?id=${id}' />" >View Result</a></td>
+						<td><a href="<c:url value='/student_marksheet?id=${id}' />" >Marksheet</a></td>
 					<!--  	<td><a href="<c:url value='/editStudent/${user.id}' />" >Edit</a></td>
 						<td><a href="<c:url value='/deleteStudent/${user.id}' />" >Delete</a></td>
 					 	<td><a href="<c:url value='/add_result?id=${user.id}' />" >Upload Result</a></td>

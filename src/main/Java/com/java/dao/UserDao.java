@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.java.beans.Branch;
 import com.java.beans.Course;
+import com.java.beans.Image;
 import com.java.beans.Result;
 import com.java.beans.Subject;
 import com.java.beans.User;
@@ -63,7 +64,10 @@ public interface UserDao {
 
 
 
-
+//operation on image
+		public void saveImage(Image image);
+		public List<Image> image();
+		public Image getImageById(int id);
 
 
 

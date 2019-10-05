@@ -145,7 +145,7 @@ tr:nth-child(even) {
       	<div style="height:440px">
       		<div class="main">
       		<h3>Result</h3>	
-      			 <form action="/College_MAnagement_System/saveResult" method="post" modelAttribute="resultForm">
+      			 <form action="/College_Management/saveResult" method="post" modelAttribute="resultForm">
 				<c:if test="${!empty subject}">
 
 	<table>

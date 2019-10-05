@@ -4,12 +4,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.java.beans.Image;
 import com.java.beans.Result;
 import com.java.beans.Subject;
 import com.java.beans.User;
@@ -115,7 +118,122 @@ public class StudentViewController {
 	
 	
 	
+	 @RequestMapping(value = "/student_marksheet", method = RequestMethod.GET)
+	    public ModelAndView marksheet(HttpServletRequest request) {
+	        int id = Integer.parseInt(request.getParameter("id"));
+	 	
+	        User user = service.getUserById(id);
+	        String  faculty_name=user.getFaculty_name();
+	        String name=user.getName();
+	        String branch=user.getBranch();
+	        String specialisation=user.getSpecialisation();
+	        String semester=user.getSemester();
+	        String course=user.getCourse();
+	        int sem1=Integer.parseInt(semester);
+	        int student_id=id;
+	        String br=branch;
+	        if (sem1<=2) {
+     		branch="null";
+     		specialisation="null";
+     		List<Subject> subject=service.subjectByCourse_Branch(course, semester, branch, specialisation);
+     		int each_sub_total=0;
+     		int total=0;
+     		int session_total=0;
+     		int exam_total=0;
+     		int count=subject.size();
+     		for(Subject sub:subject) {
+     	    	int session=Integer.parseInt(sub.getInternal_marks());
+     	    	int external=Integer.parseInt(sub.getExternal_marks());
+     	    	each_sub_total=session+external;
+     	    //total=total+each_sub_total;
+     	   session_total=session_total+session;
+     		exam_total=exam_total+external;
+     		}
+     		total=session_total+exam_total;
+     	  System.out.println("Sessional total"+session_total);
+     	  System.out.println("Exam total"+exam_total);     
+ 	      
+     	  List< Result> result=service.getResultById(student_id);
+     	  int session_mark=0;
+     	  int exam_mark=0;
+     	  int total_mark=0;
+     	  int cre_total=0;
+ 	     for(Result res:result) {
+ 	    	 int session=Integer.parseInt(res.getInternal_marks_ob());
+ 	    	 int external=Integer.parseInt(res.getExternal_marks_ob());
+ 	    	 int cre=res.getCredit();
+ 	    	 session_mark=session_mark+session;
+ 	    	 exam_mark=exam_mark+external;
+ 	    	 cre_total=cre_total+cre;
+ 	     }
+ 	        total_mark=session_mark+exam_mark;
+ 	        int image_id=1;    
+ 		    Image img = service.getImageById(image_id);
+ 		 	byte[] encoded=Base64.encodeBase64(img.getImage());
+ 		 	String encodedString = new String(encoded);
+ 		 	
+ 		 	ModelAndView model = new ModelAndView();
+ 		 	model.setViewName("Faculty_Marksheet");
+ 		 	model.addObject("img", img);
+ 		 	model.getModelMap().put("image", encodedString);
+ 		 	
+ 		 	model.getModelMap().put("subject",subject);
+ 		 	model.getModelMap().put("result",result);
+     		model.addObject("student_id",student_id);
+ 	        model.addObject("semester",semester);
+ 	        model.addObject("name",name);
+ 	        model.addObject("course",course);
+ 	        model.addObject("branch",br);
+ 	        model.getModelMap().put("each_sub_total",each_sub_total);
+ 	        model.addObject("total",total);
+ 	        model.addObject("session_total",session_total);
+ 	        model.addObject("exam_total",exam_total);
+ 	        model.addObject("session_mark",session_mark);
+ 	        model.addObject("exam_mark",exam_mark);
+ 	        model.addObject("total_mark",total_mark);
+ 	        model.addObject("cre_total",cre_total);
+//  	        model.addObject("subject",subect);
+ 	   //     model.addObject("e_mark_ob_total", e_mark_ob_total);
+ 	 //       model.addObject("result", result);
+ 	       
+ 			   return model; 
+     	}
+	 
 	
+		  
+/*       else if(sem1>=3) {
+     		branch=user.getBranch();
+     		specialisation=user.getSpecialisation();
+     List<Subject> subject=service.subjectByCourse_Branch(course, semester, branch, specialisation);
+     model.addAttribute("student_id",student_id);
+     model.addAttribute("semester",semester);
+     model.addAttribute("subject",subject);
+    
+		   return "Faculty_Marksheet";      
+ } */ 
+    else {
+     	ModelAndView model = new ModelAndView();
+		 	model.setViewName("studentview/{faculty_name}");
+     	return model;
+     }
+     
+	
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+
+	 
+
+	 
+	 }	 
 	
 	
 	

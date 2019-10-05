@@ -48,6 +48,7 @@
 					  <value>com.java.beans.Course</value>
 					  <value>com.java.beans.Subject</value>
 					  <value>com.java.beans.Branch</value>
+					  <value>com.java.beans.Image</value>
 					<!--    <value>com.java.beans.ResultForm</value>  -->
 			   </list>
 			   </property>     

@@ -4,127 +4,116 @@
 	<title></title>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<style type="text/css">
-		body {
-  background:url('http://cdn.wallpapersafari.com/13/6/Mpsg2b.jpg');
-  height: 100vh;
-  margin:0px;
-  font-family: 'Ubuntu', sans-serif;
-	background-size: 100% 110%;
+  body{
+    background: url('http://cdn.wallpapersafari.com/13/6/Mpsg2b.jpg');
+        height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+
+  }
+
+/*========[#4CAF50]====*/
+.loginbox{
+             width:320px;
+             height: 420px;
+            background:#fc8c03;                                                             /* #fc9d03;         */
+             color: #fff;
+             top: 50%;
+             left:50%;
+             position: absolute;
+             transform: translate(-50%,-50%);
+             box-sizing: border-box;
+             padding: 70px 30px;
+           }
+ .avatar{
+           
+           height: 100px;
+           border-radius: 8%;
+           position: absolute;
+           top: -50px;
+           left: calc(35% - 50px);
+
+
+
 }
-h1, h2, h3, h4, h5, h6,p {
-  margin:0; padding:0;
+
+
+ h1{
+     margin: 0;
+     padding: 0 0 20px;
+     text-align: center;
+     font-size: 22px;
 }
-.login {
-  margin:0 auto;
-  max-width:500px;
+
+.loginbox p{
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
 }
-.login-header {
-  color:#fff;
-  text-align:center;
-  font-size:300%;
+ .loginbox input{
+      width: 100%;
+      margin-bottom: 20px;
+
+
+ }    
+ .loginbox input[type="email"], input[type="password"] {
+          border: none;
+          border-bottom: 1px solid #fff;
+          background: transparent;
+          outline: none;
+          height: 40px;
+          color: #000;
+          font-size: 16px;
+ }  
+.loginbox input[type="submit"]{
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #fb2525;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
 }
-/* .login-header h1 {
-   text-shadow: 0px 5px 15px #000; */
-}
-.login-form {
-  border:.5px solid #fff;
-  background:#4facff;
-  border-radius:10px;
-  box-shadow:0px 0px 10px #000;
-}
-.login-form h3,p{
-  text-align:left;
-  margin-left:40px;
-  color:#fff;
-}
-.login-form {
-  box-sizing:border-box;
-  padding-top:15px;
-	padding-bottom:10%;
-  margin:5% auto;
-  text-align:center;
-}
-.login input[type="text"],input[type="email"],
-.login input[type="password"] {
-  max-width:400px;
-	width: 80%;
-  line-height:3em;
-  font-family: 'Ubuntu', sans-serif;
-  margin:1em 2em;
-  border-radius:5px;
-  border:2px solid #f2f2f2;
-  outline:none;
-  padding-left:10px;
-}
-.login-form input[type="submit"] {
-  height:30px;
-  width:100px;
-  background:#fff;
-  border:1px solid #f2f2f2;
-  border-radius:20px;
-  color: slategrey;
-  text-transform:uppercase;
-  font-family: 'Ubuntu', sans-serif;
-  cursor:pointer;
-}
-.login-form input[type="submit"]:hover{
+.loginbox input[type="submit"]:hover{
   cursor: pointer;
-  background: #ffc107;     
+  background: #ffc107;
   color: #000;
 }
-.login-form a{
+.loginbox a{
   text-decoration: none;
   font-size: 12px;
   line-height: 20px;
-  color: darkgray;
+  color:#5e03fc;
 
 }
-.login-form a:hover{
-  color: #00ff00;
+.loginbox a:hover{
+  color: #ffc107;
 }
-/*Media Querie*/
-@media only screen and (min-width : 150px) and (max-width : 530px){
-  .login-form h3,p {
-    text-align:center;
-    margin:0;
-  }
-  .sign-up a{
-           text-align:center;
-    margin:0;
-  }
-  .sign-up{
-    margin:10px 0;
-  }
-  .login-button {
-    margin-bottom:10px;
-  }
-}
-	</style>
+</style>
 </head>
 <body>
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
+	
 
-<div class="login">
-  <div class="login-header">
-    <h1>Login</h1>
-  </div>
-  <form action="login" method="post" id="userlogin">
-  <div class="login-form">
-    <h3>Email:</h3>
-    <input type="email" placeholder="Email" name="email" id="email" /><br>
-    <h3>Password:</h3>
-    <input type="password" placeholder="Password" name="password" id="password" />
-    <br>
-    <input type="submit" value="Login" class="login-button" id="submit" />
-    <br>
-   <p>New User? <a href="registration" >Register Here</a></p>
-    <br>
-    <p>Forgot Password?<a href="forgot  ">Reset Password</a></p>
-    <br>
-  
-  </div>
-  </form>
-</div>
+<div class="loginbox">
+<img src="/College_Management/resources/image/download.png" class="avatar" style="width:200px" />
+         <h1>Login Here</h1> 
+      <form  action="login" method="POST" id="userlogin">   
+          
+         <p>Email</p>
+      
+        <input type="email" name="email" placeholder="Enter Your Email" id="email">
+        <p>Password</p>    
+        <input type="password" name="password" placeholder="Enter Your Password" id="password">
+        <input type="submit" name="submit" value="submit">
+   <p class="message">Not Registered?<a href="registration">Register Here</a></p>
+   <p class="message">Forgot Password?<a href="forgot">Forgot Password</a></p>  
+     </form>
+     </div>
+
 <script type="text/javascript">
 $(document).ready(function(){
   $("#submit").click(function() {

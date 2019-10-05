@@ -70,7 +70,7 @@ public @ResponseBody Map<String,Object> userList(HttpServletRequest req,HttpServ
 	List<User> user=service.listUsers();
 	map.put("data", user);
     map.put("status", "True");
-	}
+  	}
 	catch(Exception e) {System.out.println(e);
 	map.put("status", "False");
 	}
