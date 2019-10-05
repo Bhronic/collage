@@ -11,10 +11,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<style>
-		body{
+		body{  
 		background:#C0C0C0; 
 		margin:0px;
-		}
+		}  
         .header{
                 padding: 2px;
                 padding-left: 12%;
@@ -24,7 +24,7 @@
           .header h2{
           	color: black; }
               /*===============[Nav CSS]==========*/
-             .nav{
+              .nav{
               	background-color:#243238;
               	padding: 5px;
               	}
@@ -32,7 +32,7 @@
               .nav li{
               list-style: none;
               display: inline-block;
-              padding: 8px;
+              padding: 5px;
                }
            .nav a{
            	color: #fff;
@@ -49,7 +49,7 @@
                background-color: #f0f8ff;
                text-align: center;
               }
-           .sidebar {
+.sidebar {
            padding-top: 5%; 
            height: 100%;
            width: 160px;
@@ -57,15 +57,14 @@
            z-index: 1;
            top: 0;
            left: 0;
-           background-color: #455e64;
+           background-color:#455e64;
+          /* background-color: #111;  */
            overflow-x: hidden;
   
 }
 
 .sidebar a {
-  
   margin-top: 20%; 
-  
   text-decoration: none;
   font-weight:bold;
   font-size: 20px;
@@ -85,7 +84,20 @@
   text-align: left;
   cursor: pointer;
   outline: none;
-}
+  /*
+   padding: 6px 8px 6px 16px;
+  text-decoration: none;
+ font-weight:bold;
+  font-size: 20px;
+  color: #111;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+*/}
 
 .sidebar a:hover ,.dropdown-btn:hover {
   color: #f1f1f1;
@@ -99,6 +111,7 @@
   display: none;
   background-color: #262626;
   padding-left: 8px;
+  
 }
 
 /* Optional: Style the caret down icon */
@@ -106,95 +119,105 @@
   float: right;
   padding-right: 8px;
 }
-
 .main {
+ 
   margin-left: 160px; /* Same as the width of the sidenav */
   padding: 0px 10px;
+  
 }
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+.main p{
+ font-size: 20px;
+ 
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
 }
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-	</style>
-	</head>
+</style>
+</head>
 <body>
 <div>
 	<div class="header">
-	  <h2>WELCOME <em>FACULTY</em></h2>
+	  <h2>WELCOME <em>ADMIN</em></h2>
 	</div>
          	<!-- Nav -->
       	<div class="nav">
       		<ul>
-    			<li>CHANGE</li> 
+                
+	<!--    <li style="padding-left: 50px;"><a href="#">MENU</a></li>
+				<li style="float: center;"><a href="#">ABOUT</a></li>
+				<li style="float: center;"><a href="#">CONTACT</a></li> -->
+				<li><a>CHANGE</a></li>    			
 				<li style="float: right;"><a href="index.jsp">LOGOUT</a></li>
 			</ul>
-      	</div>   
+      	</div>    
      
       <!-- main -->
       	<div style="height:440px">
-      		<div class="main">
-      		<h3>Student</h3>	
-      			<c:if test="${!empty studentview}">
-					<table>
-						<tr>
-							<th>ID</th>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Contact</th>
-							<th>Semester</th>
-							<th>Edit</th>
-							<th>Delete</th>
-							<th>Result</th>
-							<th>Result View</th>
-							<th>Total Mark</th>
-							<th>Marksheet</th>
-						</tr>
-				<c:forEach items="${studentview}" var="user">
-					<tr>
-						<td>${user.id}</td>
-						<td>${user.name}</td>
-						<td>${user.email}</td>
-						<td>${user.contact_no}</td>
-						<td>${user.semester }</td>
-						<td><a href="<c:url value='/editStudent/${user.id}' />" >Edit</a></td>
-						<td><a href="<c:url value='/deleteStudent/${user.id}' />" >Delete</a></td>
-					 	<td><a href="<c:url value='/add_result?id=${user.id}' />" >Upload Result</a></td>
-					 	<td><a href="<c:url value='/view_result?id=${user.id}' />" >View Result</a></td>
-					 	<td><a href="<c:url value='/total_result?id=${user.id}' />" >Total Result</a></td>  
-					    <td><a href="<c:url value='/marksheet?id=${user.id}' />" >MarkSheet</a></td> 
-					</tr>  
-				</c:forEach>
-			</table>
-		</c:if>
-  </div>
+      		<div class="main">	
+ 			<c:if test="${!empty user}">
+
+	<c:forEach items="${user}" var="user">
+		
+			
+			<p>Name:${user.name}</p>
+			<p>Address:${user.address}</p>
+			<p>City:${user.city}</p>
+			<p>State:${user.state}</p>
+		    <p>Pincode: ${user.pincode}</p>
+		    <p>Email:   ${user.email}</p>
+		    <p>Contact: ${user.contact_no}</p>
+	</c:forEach>
+	
+</c:if> 
+      		</div>
       	
       	</div>
-      <!-- footer -->
+      <!-- sidebar -->
            
  </div>
  <div class="sidebar">
-  <a href="introduction.jsp"><i class="fa fa-fw fa-home"></i> INTRODUCTION</a>
-  
-<button class="dropdown-btn"><i class="fa fa-fw fa-user"></i>Student
-    <i class="fa fa-caret-down"></i>
+  <a href="introduction/id=${user.id}"><i class="fa fa-fw fa-home"></i> INTRODUCTION</a>
+<button class="dropdown-btn">
+<i class="fa fa-fw fa-user"></i>Faculty<i class="fa fa-caret-down"></i>
+</button>
+<div class="dropdown-container">
+    <a href="faculty_view"><i class="fa fa-circle-o"></i>List</a>
+</div>
+  <button class="dropdown-btn">
+  <i class="fa fa-fw fa-user"></i>Student<i class="fa fa-caret-down"></i>
   </button>
-  <c:forEach items="${studentview}" var="user" >
   <div class="dropdown-container">
-    <a href="studentview/${user.faculty_name}"><i class="fa fa-circle-o"></i>List</a>
+    <a href="allstudent_view"><i class="fa fa-circle-o"></i>List</a>
 </div>
-</c:forEach>
+
+  <button class="dropdown-btn">
+  <i class="fa fa-fw fa-user"></i>Course<i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="course"><i class="fa fa-circle-o"></i>List</a>
+     <a href="add_course"><i class="fa fa-circle-o"></i>Add</a>
 </div>
+  <button class="dropdown-btn">
+  <i class="fa fa-fw fa-user"></i>Branch<i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="branch"><i class="fa fa-circle-o"></i>List</a>
+     <a href="add_branch"><i class="fa fa-circle-o"></i>Add</a>
+</div>
+ <button class="dropdown-btn">
+  <i class="fa fa-fw fa-user"></i>Subject<i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="subject"><i class="fa fa-circle-o"></i>List</a>
+     <a href="add_subject"><i class="fa fa-circle-o"></i>Add</a>
+</div>
+ <button class="dropdown-btn">
+  <i class="fa fa-fw fa-user"></i>Gallery<i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+  <!--   <a href="subject"><i class="fa fa-circle-o"></i>List</a>  --> 
+     <a href="add_image"><i class="fa fa-circle-o"></i>Add</a>
+</div>
+</div>
+
   <script>
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
 var dropdown = document.getElementsByClassName("dropdown-btn");

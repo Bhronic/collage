@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.java.beans.Branch;
 import com.java.beans.Course;
+import com.java.beans.Image;
 import com.java.beans.Result;
 import com.java.beans.Subject;
 import com.java.beans.User;
@@ -505,5 +506,34 @@ public class UserDaoImpl implements UserDao {
     	     	
     		 	}
     	 	
+   //operation on image
+    	 	public void saveImage(Image image) {
+    			Session session = sessionFactory.getCurrentSession();
+    	     	Transaction t = session.beginTransaction();
+    			
+    			session.save(image);
+    			t.commit();
+    			}
+    	 	
+    	 	 @SuppressWarnings("unchecked")
+    			public List<Image> image(){
+    	        	Session session = sessionFactory.getCurrentSession();
+    	     		
+    	     		Transaction t=session.beginTransaction();
+    	     		
+    				List<Image> list = session.createQuery("from Image").list();
+    	     		for(Image b : list){
+    	     			System.out.println("Image List::"+b);
+    	     		}
+    	     		t.commit();
+    	     		return list;
+    	        }
+    	 	
+    	 
+    		public Image getImageById(int id) {
+    			Image img = getSession().get(Image.class, id);
+    			return img;	
+    		}
     		
+
 }

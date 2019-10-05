@@ -175,7 +175,9 @@ tr:nth-child(even) {
            
  </div>
  <div class="sidebar">
-  <a href="introduction.jsp"><i class="fa fa-fw fa-home"></i>INTRODUCTION</a>
+ 
+  <a href=""><i class="fa fa-fw fa-home"></i>INTRODUCTION</a>
+
 <button class="dropdown-btn"><i class="fa fa-fw fa-user"></i>Faculty
 <i class="fa fa-caret-down"></i>
  </button>

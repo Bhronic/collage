@@ -1,5 +1,6 @@
 package com.java.controller;
 import java.io.IOException;
+//import java.util.Base64;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.codec.binary.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +18,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+//import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.java.beans.Branch;
 import com.java.beans.Course;
+import com.java.beans.Image;
 import com.java.beans.Subject;
 import com.java.beans.User;
 import com.java.service.UserService;
@@ -53,6 +60,17 @@ public class AdminViewController {
 	    	return branch;
 	    }
 	 
+	 /*   @RequestMapping(value = "/introduction", method = RequestMethod.GET)
+	    public String marksheet(HttpServletRequest request,Model model) {
+	        int id = Integer.parseInt(request.getParameter("id"));
+	 	
+	        User user = service.getUserById(id);
+	        model.addAttribute("user", user);
+	        return "admin_introduction";
+	    }
+	   */ 
+	    
+	    
 	
 @RequestMapping(value = "/faculty_view", method = RequestMethod.GET, headers = "Accept=application/json")
 public String getFaculty(Model model) {
@@ -266,10 +284,45 @@ public String deleteSubject(@PathVariable Integer id, Model model) {
 }
 
 
+//operation on image
+@RequestMapping("/add_image")    
+public String showImageAdd(Model m){    
+    m.addAttribute("command", new Image());  
+    return "add_image";   
+}
+@RequestMapping(value = "/doUpload", method = RequestMethod.POST)
+public String handleFileUpload(HttpServletRequest request,
+        @RequestParam MultipartFile[] image) throws Exception {
+      
+    if (image != null && image.length > 0) {
+        for (MultipartFile aFile : image){
+              
+            System.out.println("Saving file: " + aFile.getOriginalFilename());
+             
+            Image uploadFile = new Image();
+            uploadFile.setImage_name(aFile.getOriginalFilename());
+            uploadFile.setImage(aFile.getBytes());
+            service.saveImage(uploadFile);               
+        }
+    }
+  
+    return "Faculty_Marksheet";
+}  
 
 
-
-
+@RequestMapping(value="/showimage/{id}",method=RequestMethod.GET)
+public ModelAndView showImage(@PathVariable int id) throws IOException {
+	Image img = service.getImageById(id);
+	byte[] encoded=Base64.encodeBase64(img.getImage());
+	//System.out.println("encoded byte = "+encoded);
+	String encodedString = new String(encoded);
+	//System.out.println("encoded string = "+encodedString);
+	ModelAndView model = new ModelAndView();
+	model.setViewName("Faculty_Marksheet");
+	model.addObject("img", img);
+	model.getModelMap().put("image", encodedString);
+	return model;
+}
 
 
 

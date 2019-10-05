@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.java.beans.Branch;
 import com.java.beans.Course;
+import com.java.beans.Image;
 import com.java.beans.Result;
 import com.java.beans.Subject;
 import com.java.beans.User;
@@ -194,5 +195,19 @@ public class UserServiceImpl implements UserService {
 		@Transactional
 	 	public Result getResultByRId(int id) {
 	 		return dao.getResultByRId(id);
+	 	}
+		
+//operation on image
+		@Transactional
+		public void saveImage(Image image) {
+			dao.saveImage(image);
+		}
+		@Transactional
+	    public List<Image> image(){
+	    	return dao.image();
+	    }
+		@Transactional
+	 	public Image getImageById(int id) {
+	 		return dao.getImageById(id);
 	 	}
 }

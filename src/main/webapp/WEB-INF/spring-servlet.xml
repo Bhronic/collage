@@ -20,5 +20,11 @@ http://www.springframework.org/schema/context
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
-                   
+            <bean id="multipartResolver"   class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>  
+         
+<mvc:resources mapping="/resources/**" location="/resources/"
+	cache-period="31556926"/>
+
+    <mvc:annotation-driven />
+
 </beans>

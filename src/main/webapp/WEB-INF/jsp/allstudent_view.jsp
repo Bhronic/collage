@@ -213,6 +213,13 @@ tr:nth-child(even) {
     <a href="subject"><i class="fa fa-circle-o"></i>List</a>
      <a href="add_subject"><i class="fa fa-circle-o"></i>Add</a>
 </div>
+ <button class="dropdown-btn">
+  <i class="fa fa-fw fa-user"></i>Gallery<i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+  <!--   <a href="subject"><i class="fa fa-circle-o"></i>List</a>  --> 
+     <a href="add_image"><i class="fa fa-circle-o"></i>Add</a>
+</div>
 </div>
   <script>
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
